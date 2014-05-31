@@ -14,13 +14,13 @@ pprint.pprint(s.get())
 pprint.pprint(s.search(q='spending'))
 
 
-# s = Groups()
-# pprint.pprint(s.get())
+s = Groups()
+pprint.pprint(s.get())
 
 
-# s = Tags()
-# pprint.pprint(s.get())
+s = Tags()
+pprint.pprint(s.get())
 
 
-# s = Resource()
-# pprint.pprint(s.get(q='District Names'))
+s = Resource()
+pprint.pprint(s.get(q='District Names'))
