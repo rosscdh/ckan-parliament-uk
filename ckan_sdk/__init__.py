@@ -35,6 +35,13 @@ class Parla(object):
 class Packages(Parla):
     action = 'package_list'
 
+    def __init__(self, *args, **kwargs):
+        self.action = 'package_list'  # reset
+
+    def search(self, q, **kwargs):
+        self.action = 'package_search'
+        return super(Packages, self).get(q=q, **kwargs)
+
 
 class Groups(Parla):
     action = 'group_list'

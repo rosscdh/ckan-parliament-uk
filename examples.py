@@ -10,14 +10,17 @@ import pprint
 s = Packages()
 pprint.pprint(s.get())
 
-
-s = Groups()
-pprint.pprint(s.get())
-
-
-s = Tags()
-pprint.pprint(s.get())
+# search
+pprint.pprint(s.search(q='spending'))
 
 
-s = Resource()
-pprint.pprint(s.get(q='District Names'))
+# s = Groups()
+# pprint.pprint(s.get())
+
+
+# s = Tags()
+# pprint.pprint(s.get())
+
+
+# s = Resource()
+# pprint.pprint(s.get(q='District Names'))
