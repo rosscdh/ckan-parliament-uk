@@ -9,10 +9,13 @@ import pprint
 
 s = Packages()
 pprint.pprint(s.get())
+pprint.pprint(s.results)
+pprint.pprint(s.help)
 
 # search
-pprint.pprint(s.search(q='spending'))
-
+s.search(q='spending')
+pprint.pprint(s.help)
+pprint.pprint(s.results)
 
 s = Groups()
 pprint.pprint(s.get())

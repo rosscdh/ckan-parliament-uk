@@ -8,14 +8,20 @@ class Parla(object):
     version = 3
     base_url = 'http://demo.ckan.org/api/{version}/action/'
     resp = None  # response from server
-    resp_status = None # shortcut to response.status_code
-    resp_headers = None # shortcut to response.status_code
+    resp_status = None  # shortcut to response.status_code
+    resp_headers = None  # shortcut to response.status_code
+    resp_json = None  # shortcut to response.json()
+    results = []  # shortcut to resp.json().get('results', [])
+    help = None  # shortcut to provided api help
 
     def __init__(self, api_key=None, *args, **kwargs):
         self.api_key = api_key
         self.resp = None
         self.resp_status = None
         self.resp_headers = None
+        self.resp_json = None
+        self.results = []
+        self.help = None
         self.version = kwargs.get('version', self.version)
 
     @property
@@ -34,11 +40,21 @@ class Parla(object):
         self.resp = resp
         self.resp_status = resp.status_code
         self.resp_headers = resp.headers
+        self.resp_json = resp.json()
+        self.results = []  # reset
+        self.help = None  # reset
+
+        if self.resp_status in [200] and 'result' in self.resp_json:
+            self.results = self.resp_json.get('result', [])
+
+        if self.resp_status in [200] and 'help' in self.resp_json:
+            self.help = self.resp_json.get('help', None)
+
         return resp
 
     def get(self, **kwargs):
         self.response(self.r.get(self.endpoint, params=kwargs, headers=self.headers))
-        return self.resp.json()
+        return self.resp_json
 
 
 class Packages(Parla):
