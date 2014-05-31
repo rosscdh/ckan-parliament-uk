@@ -21,19 +21,18 @@ Demos
 
 ```
 service = Packages()
-service.get()  # perform the GET (returns the full json response)
-service.help  # View the requests HELP (if present)
-service.results  # shortcut to just the results iteratable (list)
+print service.get()  # perform the GET (returns the results)
+print service.help  # View the requests HELP (if present)
 
 # loop over the results
 for i in service.results:
     print i
 
 # Additional shortcuts
-service.resp  # the full response as per Requests Library: http://docs.python-requests.org/en/latest/
-service.resp_status  # response status (200, 401...)
-service.resp_headers  # the responses headers
-service.resp_json  # the responses full json object
+print service.resp  # the full response as per Requests Library: http://docs.python-requests.org/en/latest/
+print service.resp_status  # response status (200, 401...)
+print service.resp_headers  # the responses headers
+print service.resp_json  # the responses full json object
 ```
 
 Authentication

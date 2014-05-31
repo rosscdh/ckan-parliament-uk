@@ -47,14 +47,14 @@ class Parla(object):
         if self.resp_status in [200] and 'result' in self.resp_json:
             self.results = self.resp_json.get('result', [])
 
-        if self.resp_status in [200] and 'help' in self.resp_json:
+        if 'help' in self.resp_json:
             self.help = self.resp_json.get('help', None)
 
         return resp
 
     def get(self, **kwargs):
         self.response(self.r.get(self.endpoint, params=kwargs, headers=self.headers))
-        return self.resp_json
+        return self.results
 
 
 class Packages(Parla):
