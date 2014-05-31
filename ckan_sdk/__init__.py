@@ -4,7 +4,8 @@ import requests
 
 class Parla(object):
     r = requests
-    base_url = 'http://demo.ckan.org/api/3/action/'
+    version = 3
+    base_url = 'http://demo.ckan.org/api/{version}/action/'
     resp = None  # response from server
     resp_status = None # shortcut to response.status_code
     resp_headers = None # shortcut to response.status_code
@@ -13,10 +14,12 @@ class Parla(object):
         self.resp = None
         self.resp_status = None
         self.resp_headers = None
+        self.version = kwargs.get('version', self.version)
 
     @property
     def endpoint(self):
-        return '%s%s' % (self.base_url, self.action)
+        base_url = self.base_url.format(version=self.version)  # allow user to override the version
+        return '%s%s' % (base_url, self.action)
 
     def response(self, resp):
         self.resp = resp
