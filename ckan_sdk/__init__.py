@@ -4,17 +4,26 @@ import requests
 
 class Parla(object):
     r = requests
+    api_key = None
     version = 3
     base_url = 'http://demo.ckan.org/api/{version}/action/'
     resp = None  # response from server
     resp_status = None # shortcut to response.status_code
     resp_headers = None # shortcut to response.status_code
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, api_key=None, *args, **kwargs):
+        self.api_key = api_key
         self.resp = None
         self.resp_status = None
         self.resp_headers = None
         self.version = kwargs.get('version', self.version)
+
+    @property
+    def headers(self):
+        """
+        Allow custom authorisation header to be passed in
+        """
+        return {'authorization': self.api_key} if self.api_key is not None else None
 
     @property
     def endpoint(self):
@@ -28,7 +37,7 @@ class Parla(object):
         return resp
 
     def get(self, **kwargs):
-        self.response(self.r.get(self.endpoint, params=kwargs))
+        self.response(self.r.get(self.endpoint, params=kwargs, headers=self.headers))
         return self.resp.json()
 
 

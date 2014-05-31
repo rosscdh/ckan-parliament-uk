@@ -24,3 +24,13 @@ pprint.pprint(s.get())
 
 s = Resource()
 pprint.pprint(s.get(q='District Names'))
+
+"""
+Authorized requests
+-------------------
+
+Will look like, for requests that need them, eventually
+"""
+
+s = Packages(api_key='XXX')
+pprint.pprint(s.get())
